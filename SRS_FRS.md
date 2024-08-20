@@ -243,3 +243,11 @@ This FRS outlines the detailed functionalities required for the implementation o
 - **Jenkins/GitHub Actions**: For continuous integration and deployment.
 
 By following these SRS and FRS guidelines and leveraging the suggested tech stack, you can systematically design, develop, and deploy a robust Service Operations-Incident Management and Service Requests system.
+
+# Project Documentation
+
+## Class Diagram
+
+Below is the class diagram for the Service Operations-Incident Management and Service Requests system:
+
+![Class Diagram](Assets/Class%20Diagram.png)
