@@ -1,0 +1,160 @@
+@startuml
+
+' Define classes
+class Ticket {
+  - ticketID: String
+  - timestamp: DateTime
+  - problemStatement: String
+  - status: String
+  - priority: String
+  - category: String
+  - subcategory: String
+  - criticality: String
+  - severity: String
+  - assignedTo: Technician
+  - client: Client
+  - location: Location
+  - department: Department
+  - project: Project
+  - attachments: List<Attachment>
+  - comments: List<Comment>
+  + createTicket()
+  + updateTicket()
+  + closeTicket()
+  + assignTechnician(technician: Technician)
+  + addComment(comment: Comment)
+  + addAttachment(attachment: Attachment)
+}
+
+class ServiceRequest {
+  - requestID: String
+  - timestamp: DateTime
+  - description: String
+  - status: String
+  - requestType: String
+  - client: Client
+  - location: Location
+  - department: Department
+  - project: Project
+  - attachments: List<Attachment>
+  - approver: Approver
+  + submitRequest()
+  + updateRequest()
+  + approveRequest(approver: Approver)
+  + rejectRequest(approver: Approver)
+  + addAttachment(attachment: Attachment)
+}
+
+class Technician {
+  - technicianID: String
+  - name: String
+  - email: String
+  - phone: String
+  - assignedTickets: List<Ticket>
+  + resolveTicket(ticket: Ticket)
+  + updateTicket(ticket: Ticket)
+}
+
+class Administrator {
+  - adminID: String
+  - name: String
+  - email: String
+  - phone: String
+  - managedTickets: List<Ticket>
+  - managedRequests: List<ServiceRequest>
+  + createTicket(ticket: Ticket)
+  + createRequest(request: ServiceRequest)
+  + configureSettings()
+  + manageWorkflows()
+}
+
+class Client {
+  - clientID: String
+  - name: String
+  - email: String
+  - phone: String
+  - submittedTickets: List<Ticket>
+  - submittedRequests: List<ServiceRequest>
+  + submitTicket(ticket: Ticket)
+  + submitRequest(request: ServiceRequest)
+}
+
+class Location {
+  - locationID: String
+  - address: String
+  - city: String
+  - state: String
+  - country: String
+  + getLocationDetails()
+}
+
+class Department {
+  - departmentID: String
+  - name: String
+  + getDepartmentDetails()
+}
+
+class Project {
+  - projectID: String
+  - name: String
+  - description: String
+  + getProjectDetails()
+}
+
+class Attachment {
+  - attachmentID: String
+  - fileName: String
+  - fileType: String
+  - fileSize: Integer
+  - fileContent: Binary
+  + uploadAttachment()
+  + getAttachmentDetails()
+}
+
+class Comment {
+  - commentID: String
+  - content: String
+  - timestamp: DateTime
+  - author: String
+  + addComment()
+  + getCommentDetails()
+}
+
+class Approver {
+  - approverID: String
+  - name: String
+  - email: String
+  - phone: String
+  + approveRequest(request: ServiceRequest)
+  + rejectRequest(request: ServiceRequest)
+}
+
+class Notification {
+  - notificationID: String
+  - type: String
+  - recipient: String
+  - message: String
+  - timestamp: DateTime
+  + sendNotification()
+  + getNotificationDetails()
+}
+
+' Define relationships
+Ticket "1" -- "0..*" Attachment : has >
+Ticket "1" -- "0..*" Comment : has >
+ServiceRequest "1" -- "0..*" Attachment : has >
+ServiceRequest "1" -- "0..*" Comment : has >
+Ticket "0..*" -- "1" Technician : assignedTo >
+ServiceRequest "0..*" -- "1" Approver : requires >
+Client "1" -- "0..*" Ticket : submits >
+Client "1" -- "0..*" ServiceRequest : submits >
+Administrator "1" -- "0..*" Ticket : manages >
+Administrator "1" -- "0..*" ServiceRequest : manages >
+Location "1" -- "0..*" Ticket : associatedWith >
+Department "1" -- "0..*" Ticket : associatedWith >
+Project "1" -- "0..*" Ticket : associatedWith >
+Location "1" -- "0..*" ServiceRequest : associatedWith >
+Department "1" -- "0..*" ServiceRequest : associatedWith >
+Project "1" -- "0..*" ServiceRequest : associatedWith >
+
+@enduml
