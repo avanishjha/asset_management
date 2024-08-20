@@ -1,4 +1,3 @@
-Creating a Software Requirements Specification (SRS) and Functional Requirements Specification (FRS) document is crucial for defining the project’s scope, functionalities, and technical requirements. Below is a structured approach to these documents, including the suggested tech stack.
 
 ---
 
@@ -229,3 +228,18 @@ This FRS outlines the detailed functionalities required for the implementation o
 **Hosting and Deployment:**
 - **AWS/Azure/GCP**: For cloud hosting and services.
 - **Docker**: For containerization
+
+.
+- **Kubernetes**: For orchestration if needed.
+
+**Version Control:**
+- **Git/GitHub/GitLab**: For version control and collaboration.
+
+**Security:**
+- **SSL/TLS**: For data encryption.
+- **OAuth2**: For secure authentication.
+
+**Automation and CI/CD:**
+- **Jenkins/GitHub Actions**: For continuous integration and deployment.
+
+By following these SRS and FRS guidelines and leveraging the suggested tech stack, you can systematically design, develop, and deploy a robust Service Operations-Incident Management and Service Requests system.
