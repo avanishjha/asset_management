@@ -45,16 +45,6 @@ class ServiceRequest {
   + addAttachment(attachment: Attachment)
 }
 
-class Technician {
-  - technicianID: String
-  - name: String
-  - email: String
-  - phone: String
-  - assignedTickets: List<Ticket>
-  + resolveTicket(ticket: Ticket)
-  + updateTicket(ticket: Ticket)
-}
-
 class Administrator {
   - adminID: String
   - name: String
@@ -144,8 +134,7 @@ Ticket "1" -- "0..*" Attachment : has >
 Ticket "1" -- "0..*" Comment : has >
 ServiceRequest "1" -- "0..*" Attachment : has >
 ServiceRequest "1" -- "0..*" Comment : has >
-Ticket "0..*" -- "1" Technician : assignedTo >
-ServiceRequest "0..*" -- "1" Approver : requires >
+ServiceRequest "1" -- "1" Approver : requires >
 Client "1" -- "0..*" Ticket : submits >
 Client "1" -- "0..*" ServiceRequest : submits >
 Administrator "1" -- "0..*" Ticket : manages >
